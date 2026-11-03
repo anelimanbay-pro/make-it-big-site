@@ -64,6 +64,13 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:16px;paddi
 .channels .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;justify-content:center;font-weight:600;color:var(--muted)}
 .channels span.lbl{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
 
+.langs{padding-block:36px 0}
+.langs .box{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;padding:24px 28px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line)}
+.langs h3{font-size:1.4rem;margin-bottom:4px}
+.langs p{margin:0;color:var(--muted);font-size:.95rem;max-width:46ch}
+.langs ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.langs li{padding:8px 14px;border-radius:6px;font-weight:600;font-size:.92rem;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line)}
+.langs li:first-child{background:var(--metal);color:var(--pop-ink);box-shadow:none}
 /* plans */
 section{padding-block:88px 0}
 .head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
@@ -186,6 +193,16 @@ footer{padding-block:48px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-cont
 
 <div class="channels"><div class="wrap">
   <span class="lbl">Seen everywhere your customers are</span><div class="strip" role="list" aria-label="Posted on all your social channels"><span role="listitem" title="Instagram"><svg class="ic" aria-label="Instagram"><use href="#i-instagram"/></svg></span><span role="listitem" title="TikTok"><svg class="ic" aria-label="TikTok"><use href="#i-tiktok"/></svg></span><span role="listitem" title="Facebook"><svg class="ic" aria-label="Facebook"><use href="#i-facebook"/></svg></span><span role="listitem" title="LinkedIn"><svg class="ic" aria-label="LinkedIn"><use href="#i-linkedin"/></svg></span><span role="listitem" title="X"><svg class="ic" aria-label="X"><use href="#i-x"/></svg></span><span role="listitem" title="YouTube"><svg class="ic" aria-label="YouTube"><use href="#i-youtube"/></svg></span><span role="listitem" title="Threads"><svg class="ic" aria-label="Threads"><use href="#i-threads"/></svg></span><span role="listitem" title="Pinterest"><svg class="ic" aria-label="Pinterest"><use href="#i-pinterest"/></svg></span></div></div></div>
+
+<div class="wrap langs">
+  <div class="box">
+    <div>
+      <h3>We speak your language.</h3>
+      <p>Work with us in the language you are most comfortable in, and reach your audience in the one they love.</p>
+    </div>
+    <ul aria-label="Languages we work in"><li>English</li><li>Portuguese</li><li>Italian</li><li>Russian</li><li>Kazakh</li></ul>
+  </div>
+</div>
 
 <div class="wrap">
 <section id="plans">
@@ -319,7 +336,7 @@ footer{padding-block:48px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-cont
     </div>
     <div class="act">
       <a class="btn accent lg" href="#call">Book your free 20-min call</a>
-      <div class="perks"><span>100% free</span><span>20 minutes</span><span>No obligation</span></div>
+      <div class="perks"><span>100% free</span><span>20 minutes</span><span>In your language</span><span>No obligation</span></div>
     </div>
   </div>
 </section>
