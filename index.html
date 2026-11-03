@@ -1,0 +1,364 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Make It Big</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one growing scale. Hero type and the three plan cards get physically bigger left to right (Start small, make it big). */
+:root{
+  --bg:#F6F4EF; --surface:#FFFFFF; --ink:#2A1812; --muted:#6E5F57; --line:#DDD9CF;
+  --accent:#2A1812; --accent-ink:#FFFFFF; --pop:#FF9540; --pop-ink:#2A1812; --metal:#FF9540;
+  --display:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#2A1812; --surface:#35221A; --ink:#F6F1EC; --muted:#BFB0A6; --line:#4A332A;
+  --accent:#F4F4F5; --accent-ink:#2A1812; --pop:#FFA255; --pop-ink:#2A1812; --metal:#FFA255; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#2A1812; --surface:#35221A; --ink:#F6F1EC; --muted:#BFB0A6; --line:#4A332A;
+  --accent:#F4F4F5; --accent-ink:#2A1812; --pop:#FFA255; --pop-ink:#2A1812; --metal:#FFA255; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.035em}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px}
+.logo{font-family:var(--display);font-weight:800;font-size:1.35rem;text-decoration:none;display:flex;align-items:baseline;gap:2px}
+.logo b{color:var(--accent);font-size:1.7rem}
+.links{display:flex;gap:24px;align-items:center;font-weight:500;font-size:.95rem}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+.links a.btn,.links a.btn:hover{color:var(--accent-ink)}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);font-weight:600;padding:12px 22px;border-radius:6px;text-decoration:none;border:0;font:inherit;font-weight:600;cursor:pointer}
+.btn.accent{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+@media(max-width:640px){.links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding-block:48px 72px;display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:end}
+.hero h1{font-size:clamp(3rem,8.5vw,6.6rem);font-weight:800}
+.hero h1 .s{font-size:.5em;display:block;color:var(--muted);font-weight:700;margin-bottom:.1em}
+.hero h1 mark{background:var(--metal);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.14);padding:0 .12em;border-radius:.08em}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:44ch;margin:28px 0}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.grow{display:flex;align-items:flex-end;gap:14px;height:300px}
+.grow div{flex:1;border-radius:10px;display:flex;align-items:flex-start;padding:14px;font-family:var(--display);font-weight:700;font-size:.9rem}
+.grow .g1{height:28%;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line)}
+.grow .g2{height:58%;background:var(--accent);color:var(--accent-ink)}
+.grow .g3{height:100%;background:var(--metal);color:var(--pop-ink)}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.grow{height:200px}}
+
+/* channels strip */
+.chan-icons{display:flex;flex-wrap:wrap;gap:8px}
+.chan-icons span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--ink)}
+.p3 .chan-icons span{background:color-mix(in srgb,#2A1812 14%,transparent);color:#2A1812}
+.ic{width:17px;height:17px;fill:currentColor}
+.chan-label{margin:0 0 -8px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.p3 .chan-label{color:color-mix(in srgb,#2A1812 70%,transparent)}
+.channels .ic{width:22px;height:22px;color:var(--ink)}
+.channels .strip{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}
+
+.channels{border-block:1px solid var(--line);padding-block:18px}
+.channels .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;justify-content:center;font-weight:600;color:var(--muted)}
+.channels span.lbl{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+
+/* plans */
+section{padding-block:88px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.head h2{font-size:clamp(2rem,4.5vw,3.4rem);max-width:22ch}
+.head p{color:var(--muted);max-width:42ch;margin:0}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:end}
+.plan{background:var(--surface);border-radius:12px;padding:28px;box-shadow:inset 0 0 0 1.5px var(--line);display:flex;flex-direction:column;gap:18px;min-width:0}
+.plan.p1{padding-block:24px}
+.plan.p2{padding-block:48px;box-shadow:inset 0 0 0 2.5px var(--accent)}
+.plan.p3{padding-block:72px;background:var(--metal);color:#2A1812;box-shadow:none}
+.tag{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:4px;background:var(--bg);color:var(--ink)}
+.p2 .tag{background:var(--accent);color:var(--accent-ink)}
+.p3 .tag{background:var(--metal);color:var(--pop-ink)}
+.plan h3{font-weight:800}
+.p1 h3{font-size:2rem}.p2 h3{font-size:2.6rem}.p3 h3{font-size:3.3rem}
+.sub{margin:0;color:var(--muted);font-size:.97rem}
+.p3 .sub{color:color-mix(in srgb,#2A1812 70%,transparent)}
+.price{font-family:var(--display);font-weight:800;font-size:2.6rem;letter-spacing:-.03em;line-height:1}
+.price small{font-family:var(--body);font-weight:500;font-size:.9rem;color:var(--muted);letter-spacing:0}
+.p3 .price small{color:color-mix(in srgb,#2A1812 70%,transparent)}
+.cadence{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0}
+.cadence div{background:var(--bg);border-radius:8px;padding:12px 8px;text-align:center}
+.p3 .cadence div{background:color-mix(in srgb,#2A1812 12%,transparent)}
+.cadence b{display:block;font-family:var(--display);font-size:1.8rem;line-height:1}
+.cadence span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.p3 .cadence span{color:color-mix(in srgb,#2A1812 70%,transparent)}
+ul.feat{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:.96rem}
+ul.feat li{display:flex;gap:10px}
+ul.feat li::before{content:"✓";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.65rem;font-weight:700;line-height:1}
+.p3 ul.feat li::before{background:var(--metal);color:var(--pop-ink)}
+.plan .btn{text-align:center;margin-top:auto}
+.p3 .btn{background:var(--metal);color:var(--pop-ink)}
+.note{margin-top:20px;font-size:.85rem;color:var(--muted)}
+.terms{margin:-6px 0 0;font-size:.85rem;color:var(--muted)}
+.p3 .terms{color:color-mix(in srgb,#2A1812 70%,transparent)}
+.deal{font-size:.88rem;font-weight:600;background:var(--metal);color:var(--pop-ink);padding:10px 14px;border-radius:6px;margin:0}
+.included{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;background:var(--surface);border-radius:12px;padding:20px 24px;box-shadow:inset 0 0 0 1.5px var(--line);margin-bottom:20px}
+.included h3{font-size:1.3rem}
+.included p{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.included .free{font-family:var(--display);font-weight:800;background:var(--metal);color:var(--pop-ink);padding:8px 16px;border-radius:6px;font-size:.95rem}
+@media(max-width:900px){.plans{grid-template-columns:1fr}.plan.p2,.plan.p3{padding-block:28px}}
+
+.addon{display:grid;grid-template-columns:auto 1fr auto;gap:20px 24px;align-items:center;margin-top:20px;padding:24px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.addon .badge{width:56px;height:56px;border-radius:16px;background:var(--metal);color:var(--pop-ink);display:grid;place-items:center}
+.addon .badge .ic{width:28px;height:28px}
+.addon h3{font-size:1.5rem;margin-bottom:6px}
+.addon p{margin:0;color:var(--muted);font-size:.97rem;max-width:62ch}
+.addon .cost{text-align:right;font-family:var(--display);font-weight:800;font-size:2rem;letter-spacing:-.03em;line-height:1}
+.addon .cost small{display:block;font-family:var(--body);font-weight:500;font-size:.82rem;letter-spacing:0;color:var(--muted);margin-top:6px}
+@media(max-width:700px){.addon{grid-template-columns:auto 1fr}.addon .cost{grid-column:1/-1;text-align:left}}
+
+.p3 .tag{background:#2A1812;color:#fff}
+.p3 .btn{background:#2A1812;color:#fff}
+.p3 ul.feat li::before{background:#2A1812;color:#fff}
+/* extras */
+.extras{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.extras li{display:grid;grid-template-columns:48px minmax(0,1fr) minmax(0,1.15fr);gap:8px 24px;align-items:baseline;padding:22px 12px;border-bottom:1px solid var(--line);transition:background .15s}
+.extras li:hover{background:var(--surface)}
+.extras .n{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.extras h3{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700}
+.extras p{margin:0;color:var(--muted);font-size:.97rem}
+.extras-cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:24px}
+.extras-cta span{color:var(--muted);font-size:.92rem}
+@media(max-width:700px){.extras li{grid-template-columns:32px 1fr}.extras p{grid-column:2}}
+
+.call{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:center;padding:44px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.call h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:14px;max-width:18ch}
+.call p{margin:0;color:var(--muted);max-width:52ch}
+.call .act{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.btn.lg{padding:18px 30px;font-size:1.05rem}
+.call .perks{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.88rem;font-weight:600}
+.call .perks span::before{content:"✓ ";color:var(--ink)}
+@media(max-width:800px){.call{grid-template-columns:1fr;padding:28px}}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{border-top:2px solid var(--ink);padding-top:16px;counter-increment:s}
+.steps li::before{content:"Step " counter(s);display:block;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.steps h3{font-size:1.4rem;margin-bottom:8px}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
+@media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* compare */
+.tablewrap{overflow-x:auto;background:var(--surface);border-radius:12px;box-shadow:inset 0 0 0 1.5px var(--line)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.95rem}
+th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--display);font-size:1.05rem}
+td:first-child{color:var(--muted)}
+td,th{font-variant-numeric:tabular-nums}
+
+/* final cta */
+.final{background:var(--metal);color:#2A1812;border-radius:12px;padding:56px 32px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.final h2{font-size:clamp(2rem,5vw,3.6rem);max-width:14ch}
+.final .btn{background:#2A1812;color:#fff}
+footer{padding-block:48px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;color:var(--muted);font-size:.9rem}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol><symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol><symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol><symbol id="i-threads" viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></symbol><symbol id="i-pinterest" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></symbol><symbol id="i-substack" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></symbol></svg>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#top" aria-label="Make It Big home">make it <b>big</b></a>
+    <div class="links">
+      <a href="#plans">Plans</a><a href="#extras">Extras</a><a href="#how">How it works</a><a href="#compare">Compare</a>
+      <a class="btn" href="#call">Book a free call</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <h1>Make it <mark>big.</mark></h1>
+      <p>Your marketing, handled. Pick a plan, send us your photos and ideas, and we turn them into scroll-stopping posts and reels on every channel you are on. You get the results. We do the work.</p>
+      <div class="cta"><a class="btn accent" href="#call">Book a free 20-min call</a><a class="btn ghost" href="#plans">See the plans</a></div>
+    </div>
+    <div class="grow" role="img" aria-label="Three bars growing from small to large, one per plan">
+      <div class="g1">Begin</div><div class="g2">Intelligent</div><div class="g3">Growth</div>
+    </div>
+  </header>
+</div>
+
+<div class="channels"><div class="wrap">
+  <span class="lbl">Seen everywhere your customers are</span><div class="strip" role="list" aria-label="Posted on all your social channels"><span role="listitem" title="Instagram"><svg class="ic" aria-label="Instagram"><use href="#i-instagram"/></svg></span><span role="listitem" title="TikTok"><svg class="ic" aria-label="TikTok"><use href="#i-tiktok"/></svg></span><span role="listitem" title="Facebook"><svg class="ic" aria-label="Facebook"><use href="#i-facebook"/></svg></span><span role="listitem" title="LinkedIn"><svg class="ic" aria-label="LinkedIn"><use href="#i-linkedin"/></svg></span><span role="listitem" title="X"><svg class="ic" aria-label="X"><use href="#i-x"/></svg></span><span role="listitem" title="YouTube"><svg class="ic" aria-label="YouTube"><use href="#i-youtube"/></svg></span><span role="listitem" title="Threads"><svg class="ic" aria-label="Threads"><use href="#i-threads"/></svg></span><span role="listitem" title="Pinterest"><svg class="ic" aria-label="Pinterest"><use href="#i-pinterest"/></svg></span></div></div></div>
+
+<div class="wrap">
+<section id="plans">
+  <div class="head">
+    <h2>Begin your intelligent growth on every social media channel.</h2>
+    <p>Send us the raw material: photos, clips, voice notes, ideas. We turn it into content that gets noticed and keep it coming.</p>
+  </div>
+
+  <div class="included">
+    <div>
+      <h3>Free with every plan: your Marketing Strategy and Content Plan</h3>
+      <p>Before the first post goes live, we map your goals, your audience and your content themes into a clear plan. You approve it, so you always know where your marketing is heading.</p>
+    </div>
+    <span class="free">Included, free</span>
+  </div>
+
+  <div class="plans">
+    <article class="plan p1">
+      <span class="tag">One-off payment</span>
+      <h3>Begin</h3>
+      <p class="sub">Look active and professional for six months, without lifting a finger.</p>
+      <div class="price">€600 <small>+ TAX, one-off</small></div>
+      <p class="terms">Pay once. Six months of content, scheduled and sorted.</p>
+      <p class="deal">Just €100 a month + TAX. Six months of professionally designed content, planned and posted for you, with your strategy free.</p>
+      <dl class="cadence">
+        <div><b>1</b><span>Reel / wk</span></div>
+        <div><b>2</b><span>Posts / wk</span></div>
+        <div><b>3</b><span>Total / wk</span></div>
+      </dl>
+      <p class="chan-label">Posted on every channel</p><div class="chan-icons" role="list" aria-label="Posted on all your social channels"><span role="listitem" title="Instagram"><svg class="ic" aria-label="Instagram"><use href="#i-instagram"/></svg></span><span role="listitem" title="TikTok"><svg class="ic" aria-label="TikTok"><use href="#i-tiktok"/></svg></span><span role="listitem" title="Facebook"><svg class="ic" aria-label="Facebook"><use href="#i-facebook"/></svg></span><span role="listitem" title="LinkedIn"><svg class="ic" aria-label="LinkedIn"><use href="#i-linkedin"/></svg></span><span role="listitem" title="X"><svg class="ic" aria-label="X"><use href="#i-x"/></svg></span><span role="listitem" title="YouTube"><svg class="ic" aria-label="YouTube"><use href="#i-youtube"/></svg></span><span role="listitem" title="Threads"><svg class="ic" aria-label="Threads"><use href="#i-threads"/></svg></span><span role="listitem" title="Pinterest"><svg class="ic" aria-label="Pinterest"><use href="#i-pinterest"/></svg></span></div>
+      <ul class="feat">
+        <li>Six months of posts and reels, planned and scheduled for you</li>
+        <li>Every post and reel designed and edited by pros, on brand</li>
+        <li>Made from your own photos, clips and ideas</li>
+        <li>Captions and hashtags that fit each platform</li>
+        <li>Free Marketing Strategy and Content Plan</li>
+        <li>Want to be seen even more? Extra posts and reels are available for an additional fee</li>
+      </ul>
+      <a class="btn ghost" href="#call">Begin today</a>
+    </article>
+
+    <article class="plan p2">
+      <span class="tag">Most popular</span>
+      <h3>Intelligent</h3>
+      <p class="sub">More reach, plus a strategy that gets sharper with every result.</p>
+      <div class="price">€990 <small>+ TAX / month</small></div>
+      <p class="terms">3-month commitment, renews automatically. Cancel anytime with 1 month's notice.</p>
+      <p class="deal">Around €33 a day + TAX. Content designed, posted and fine-tuned with you every two weeks, so your brand keeps getting smarter. Commit for 6 months and get 1 month free.</p>
+      <dl class="cadence">
+        <div><b>2</b><span>Reels / wk</span></div>
+        <div><b>2</b><span>Posts / wk</span></div>
+        <div><b>4</b><span>Total / wk</span></div>
+      </dl>
+      <p class="chan-label">Posted on every channel</p><div class="chan-icons" role="list" aria-label="Posted on all your social channels"><span role="listitem" title="Instagram"><svg class="ic" aria-label="Instagram"><use href="#i-instagram"/></svg></span><span role="listitem" title="TikTok"><svg class="ic" aria-label="TikTok"><use href="#i-tiktok"/></svg></span><span role="listitem" title="Facebook"><svg class="ic" aria-label="Facebook"><use href="#i-facebook"/></svg></span><span role="listitem" title="LinkedIn"><svg class="ic" aria-label="LinkedIn"><use href="#i-linkedin"/></svg></span><span role="listitem" title="X"><svg class="ic" aria-label="X"><use href="#i-x"/></svg></span><span role="listitem" title="YouTube"><svg class="ic" aria-label="YouTube"><use href="#i-youtube"/></svg></span><span role="listitem" title="Threads"><svg class="ic" aria-label="Threads"><use href="#i-threads"/></svg></span><span role="listitem" title="Pinterest"><svg class="ic" aria-label="Pinterest"><use href="#i-pinterest"/></svg></span></div>
+      <ul class="feat">
+        <li>Everything in Begin, with double the reels</li>
+        <li>Scroll-stopping posts and reels, custom designed and edited by our team</li>
+        <li>A strategy call every two weeks, with answers to your questions</li>
+        <li>We study what performs and adjust your plan to match</li>
+        <li>More of what works, less of what does not</li>
+        <li>1 article or press release a month, written in your voice to build credibility</li>
+        <li>Free Marketing Strategy and Content Plan</li>
+      </ul>
+      <a class="btn accent" href="#call">Go Intelligent</a>
+    </article>
+
+    <article class="plan p3">
+      <span class="tag">Full service</span>
+      <h3>Growth</h3>
+      <p class="sub">Your complete marketing department. We run your social media end to end, report on results and build the website that turns followers into customers.</p>
+      <div class="price">€1,990 <small>+ TAX / month</small></div>
+      <p class="terms">3-month commitment, renews automatically. Cancel anytime with 1 month's notice.</p>
+      <p class="deal">Around €66 a day + TAX gets you a full marketing team: your social media, influencers, articles and website all handled for you. Commit for 6 months and get 1 month free.</p>
+      <dl class="cadence">
+        <div><b>3</b><span>Reels / wk</span></div>
+        <div><b>3</b><span>Posts / wk</span></div>
+        <div><b>6</b><span>Total / wk</span></div>
+      </dl>
+      <p class="chan-label">Posted on every channel</p><div class="chan-icons" role="list" aria-label="Posted on all your social channels"><span role="listitem" title="Instagram"><svg class="ic" aria-label="Instagram"><use href="#i-instagram"/></svg></span><span role="listitem" title="TikTok"><svg class="ic" aria-label="TikTok"><use href="#i-tiktok"/></svg></span><span role="listitem" title="Facebook"><svg class="ic" aria-label="Facebook"><use href="#i-facebook"/></svg></span><span role="listitem" title="LinkedIn"><svg class="ic" aria-label="LinkedIn"><use href="#i-linkedin"/></svg></span><span role="listitem" title="X"><svg class="ic" aria-label="X"><use href="#i-x"/></svg></span><span role="listitem" title="YouTube"><svg class="ic" aria-label="YouTube"><use href="#i-youtube"/></svg></span><span role="listitem" title="Threads"><svg class="ic" aria-label="Threads"><use href="#i-threads"/></svg></span><span role="listitem" title="Pinterest"><svg class="ic" aria-label="Pinterest"><use href="#i-pinterest"/></svg></span></div>
+      <ul class="feat">
+        <li>Everything in Intelligent, at our highest volume</li>
+        <li>Premium design and editing for every post and reel, so your whole feed looks like one brand</li>
+        <li>Full social media management: content, scheduling, and replies to your comments and messages</li>
+        <li>A weekly call to answer your questions and sharpen strategy</li>
+        <li>Influencer collaborations: we find and liaise with creators for you</li>
+        <li>2 articles or press releases a month, written in your voice</li>
+        <li>Clear performance reports, so you see exactly what you are getting</li>
+        <li>A website built for your brand, planned with you before launch</li>
+        <li>Free Marketing Strategy and Content Plan</li>
+      </ul>
+      <a class="btn" href="#call">Go for Growth</a>
+    </article>
+  </div>
+  <p class="note">All prices are plus TAX.</p>
+</section>
+
+<section id="extras">
+  <div class="head">
+    <h2>Extras to supercharge your plan.</h2>
+    <p>Add any of these to your plan, or book them on their own. Every project starts with a plan and a fixed price, so there are no surprises.</p>
+  </div>
+  <ol class="extras">
+    <li><span class="n">01</span><h3>Articles and press releases</h3><p>Your story, professionally written and published. Articles that build trust and show your expertise, or press releases that get your news noticed.</p></li>
+    <li><span class="n">02</span><h3>Personal brand</h3><p>Become the name people think of first. LinkedIn ghostwriting, a sharp profile and positioning, and coaching for talks and interviews, all in your own voice.</p></li>
+    <li><span class="n">03</span><h3>Your marketing team, on call</h3><p>A senior marketing team a few days a month. Strategy, campaigns and reporting, without the cost of a full-time hire.</p></li>
+    <li><span class="n">04</span><h3>Go-to-market strategy</h3><p>Launch with confidence. We define your audience, positioning and message, then build the launch plan that puts your product or service in front of the right people from day one.</p></li>
+    <li><span class="n">05</span><h3>Photo and video shoot</h3><p>One shoot day that fills your content calendar for weeks. Fresh, on-brand photos and footage so your posts never run dry.</p></li>
+    <li><span class="n">06</span><h3>Video and podcast</h3><p>Turn your ideas into a show. Short videos and podcast recording and editing, from the first idea to the published episode.</p></li>
+    <li><span class="n">07</span><h3>Creators for brands</h3><p>Put your brand in front of the right audience. We find and check the right creators, then run the whole campaign with them.</p></li>
+    <li><span class="n">08</span><h3>Automation and tools</h3><p>Get hours back every week. Chat assistants for your clients, automated workflows and small custom tools built around your business.</p></li>
+    <li><span class="n">09</span><h3>Workshops</h3><p>Give your team the skills to keep growing. Practical sessions on digital marketing and the tools behind it, for teams or one to one.</p></li>
+  </ol>
+  <div class="extras-cta"><a class="btn accent" href="#call">Get a free quote</a><span>Want to post even more? Extra posts and reels are available too.</span></div>
+</section>
+
+<section id="how">
+  <div class="head"><h2>From hello to your first post, fast.</h2></div>
+  <ol class="steps">
+    <li><h3>Pick your plan</h3><p>Begin, Intelligent or Growth. Upgrade whenever you are ready.</p></li>
+    <li><h3>We build your plan, free</h3><p>Your Marketing Strategy and Content Plan, tailored to your goals. You approve it.</p></li>
+    <li><h3>We create and post</h3><p>We design, write and schedule your posts and reels on every channel.</p></li>
+    <li><h3>We learn and improve</h3><p>On Intelligent and Growth, we read the numbers and sharpen your strategy as you go.</p></li>
+  </ol>
+</section>
+
+<section id="call">
+  <div class="call">
+    <div>
+      <h2>Not sure which plan fits? Let's talk it through.</h2>
+      <p>Book a free 20-minute call with us. No pressure, no jargon. We will answer your questions, clear up any doubts and point you to the plan that fits your goals and budget.</p>
+    </div>
+    <div class="act">
+      <a class="btn accent lg" href="#call">Book your free 20-min call</a>
+      <div class="perks"><span>100% free</span><span>20 minutes</span><span>No obligation</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="head"><h2>Find your perfect fit.</h2></div>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Plan comparison table">
+  <table>
+    <thead><tr><th></th><th>Begin</th><th>Intelligent</th><th>Growth</th></tr></thead>
+    <tbody>
+      <tr><td>Reels per week</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><td>Static posts per week</td><td>2</td><td>2</td><td>3</td></tr>
+      <tr><td>Design and editing of every post and reel</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Posted on all your social channels</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Payment</td><td>One-off</td><td>Monthly</td><td>Monthly</td></tr>
+      <tr><td>Commitment</td><td>6 months, paid upfront</td><td>3 months, auto-renews</td><td>3 months, auto-renews</td></tr>
+      <tr><td>Cancellation</td><td>n/a</td><td>1 month's notice</td><td>1 month's notice</td></tr>
+      <tr><td>1 month free</td><td>n/a</td><td>With 6-month commitment</td><td>With 6-month commitment</td></tr>
+      <tr><td>Free Marketing Strategy and Content Plan</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Extra posts for an added fee</td><td>Yes</td><td>On request</td><td>On request</td></tr>
+      <tr><td>Articles or press releases</td><td>Extra</td><td>1 per month</td><td>2 per month</td></tr>
+      <tr><td>Strategy calls</td><td>None</td><td>Every 2 weeks</td><td>Weekly</td></tr>
+      <tr><td>Strategy changes from results</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Full social media management</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Influencer collaboration</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Performance reports</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Website build</td><td>No</td><td>No</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="final">
+    <h2>Ready to make it big?</h2>
+    <a class="btn" href="#plans">Pick your plan</a>
+  </div>
+</section>
+
+<footer><span>Make It Big</span></footer>
+</div>
+</head><body></body></html>
