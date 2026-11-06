@@ -144,6 +144,18 @@ ul.feat li::before{content:"✓";flex:none;width:18px;height:18px;margin-top:3px
 .call .perks{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.88rem;font-weight:600}
 .call .perks span::before{content:"✓ ";color:var(--ink)}
 @media(max-width:800px){.call{grid-template-columns:1fr;padding:28px}}
+.call{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.lead{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.lead label{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:600;color:var(--muted)}
+.lead .full{grid-column:1/-1}
+.lead input,.lead select,.lead textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:6px;padding:11px 12px;width:100%;min-width:0}
+.lead textarea{min-height:84px;resize:vertical}
+.lead input:focus,.lead select:focus,.lead textarea:focus{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--ink)}
+.lead button{grid-column:1/-1;cursor:pointer;border:0;font:inherit;font-weight:700}
+.lead .msg{grid-column:1/-1;margin:0;font-size:.92rem;font-weight:600;min-height:1.2em}
+.lead .msg.ok{color:var(--ink)}
+.lead .msg.err{color:#b3261e}
+@media(max-width:700px){.lead{grid-template-columns:1fr}}
 /* process */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;margin:0;padding:0;counter-reset:s}
 .steps li{border-top:2px solid var(--ink);padding-top:16px;counter-increment:s}
@@ -335,7 +347,26 @@ footer{padding-block:48px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-cont
       <p>Book a free 20-minute call with us. No pressure, no jargon. We will answer your questions, clear up any doubts and point you to the plan that fits your goals and budget.</p>
     </div>
     <div class="act">
-      <a class="btn accent lg" href="#call">Book your free 20-min call</a>
+      <form class="lead" id="lead" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="9c20ef5c-f5ef-4509-877e-3bb16741ecb4">
+        <input type="hidden" name="subject" value="New Make It Big enquiry">
+        <input type="hidden" name="from_name" value="Make It Big website">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
+        <label>Your name<input id="lead-name" name="name" type="text" required autocomplete="name"></label>
+        <label>Email<input id="lead-email" name="email" type="email" required autocomplete="email"></label>
+        <label>Phone (optional)<input id="lead-phone" name="phone" type="tel" autocomplete="tel"></label>
+        <label>Preferred language<select id="lead-lang" name="language"><option>English</option><option>Portuguese</option><option>Italian</option><option>Russian</option><option>Kazakh</option><option>Spanish</option></select></label>
+        <label class="full">Plan you are interested in<select id="lead-plan" name="plan"><option>Not sure yet</option><option>Begin</option><option>Intelligent</option><option>Growth</option></select></label>
+        <label class="full">Anything we should know? (optional)<textarea id="lead-msg" name="message"></textarea></label>
+        <button class="btn accent lg" type="submit">Book my free call</button>
+        <p class="msg" id="lead-msg-status" role="status" aria-live="polite"></p>
+      </form>
+      <script>
+      (function(){var f=document.getElementById('lead'),s=document.getElementById('lead-msg-status'),b=f.querySelector('button');
+      f.addEventListener('submit',function(e){e.preventDefault();s.className='msg';s.textContent='Sending...';b.disabled=true;
+      fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){return r.json()}).then(function(d){
+      if(d.success){s.className='msg ok';s.textContent='Thank you! We have your request and will be in touch very soon.';f.reset();}else{throw 0}}).catch(function(){s.className='msg err';s.textContent='Something went wrong. Please try again in a moment.';}).then(function(){b.disabled=false});});})();
+      </script>
       <div class="perks"><span>100% free</span><span>20 minutes</span><span>In your language</span><span>No obligation</span></div>
     </div>
   </div>
